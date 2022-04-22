@@ -1,0 +1,33 @@
+{
+  "name": "todssdistributie-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dave-nbg/TodssDistributie-frontend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dave-nbg/TodssDistributie-frontend/issues"
+  },
+  "homepage": "https://github.com/Dave-nbg/TodssDistributie-frontend#readme",
+  "dependencies": {
+    "@heroicons/vue": "^1.0.6",
+    "vue": "^3.2.31",
+    "vue-router": "^4.0.14",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^2.3.1",
+    "autoprefixer": "^10.4.4",
+    "postcss": "^8.4.12",
+    "tailwindcss": "^3.0.23",
+    "vite": "^2.9.0"
+  }
+}
