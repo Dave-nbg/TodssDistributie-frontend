@@ -1,6 +1,7 @@
 <script setup>
+import DistrubutionPage from './components/DistrubutionPage.vue';
 </script>
 
 <template>
-    <h1>BOE</h1>
+    <distrubution-page></distrubution-page>
 </template>
