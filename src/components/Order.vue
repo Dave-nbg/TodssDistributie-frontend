@@ -35,7 +35,7 @@ async function deleteOrder() {
 <template>
     <div class="w-40 ml-3 mt-5">
         <div class="flex justify-between">
-            <span>Tafel 1</span>
+            <span>Tafel {{ order.tableNumber }}</span>
             <button @click="pendOrder" v-if="props.order.status === 'PREPARING'" class="bg-violet-400 hover:bg-violet-500">Terug zetten</button>
         </div>
 

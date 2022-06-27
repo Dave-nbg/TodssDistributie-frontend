@@ -19,7 +19,7 @@ function  loggedIn(){
             ? window.sessionStorage.setItem("myJWT", response.headers.get("authorization").split(" ").at(1))
             : this._throwError(response.message))
         .then(() => emit("loggedIn"))
-        .catch(error => emit("loggedIn") /*alert("Foute gebruikersnaam of wachtwoord.")*/);
+        .catch(error => alert("Foute gebruikersnaam of wachtwoord."));
   }
 </script>
 

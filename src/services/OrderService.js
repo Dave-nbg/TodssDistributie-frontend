@@ -11,6 +11,8 @@ export default class OrderService {
             ), order.status)
         );
 
+        console.log(responseJson);
+
         return orders;
     }
 
