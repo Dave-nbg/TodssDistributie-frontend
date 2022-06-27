@@ -25,4 +25,13 @@ export default class OrderService {
 
         const responseJson = await response.json();
     }
+
+    async deleteOrder(id) {
+        await fetch('http://localhost:8080/order/' + id, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+    }
 }

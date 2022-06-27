@@ -23,7 +23,12 @@ async function pendOrder() {
 async function finishOrder() {
     await orderService.setOrderStatus(props.order.id, "DONE");
     emit("refresh");
-    new Audio('/scream.mp3').play();
+    //new Audio('/scream.mp3').play();
+}
+
+async function deleteOrder() {
+    await orderService.deleteOrder(props.order.id);    
+    emit("refresh")
 }
 </script>
 
@@ -44,6 +49,9 @@ async function finishOrder() {
             </button>
             <button @click="finishOrder" v-if="props.order.status === 'PREPARING'" class="mt-1 grow bg-slate-400 hover:bg-slate-500">
                 Klaar
+            </button>
+            <button @click="deleteOrder" v-if="props.order.status === 'DONE'" class="mt-1 grow bg-slate-400 hover:bg-slate-500">
+                Verwijder
             </button>
         </div>
     </div>
