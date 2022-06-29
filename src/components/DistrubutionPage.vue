@@ -18,8 +18,8 @@ const completedOrders = computed(() => orders.value.filter(order => order.status
 const locations = ref([]);
 
 onMounted(async () => {
-    orders.value = await orderService.getOrdersForLocation(18);
     locations.value = await locationService.getLocations();
+    orders.value = await orderService.getOrdersForLocation(locations.value[0].id);
 });
 
 async function loadOrdersForLocation() {
