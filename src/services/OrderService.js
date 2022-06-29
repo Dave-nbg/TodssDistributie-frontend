@@ -5,15 +5,21 @@ export default class OrderService {
     async getOrdersForLocation(locationId) {
         const response = await fetch("http://localhost:8080/order/all/" + locationId);
         const responseJson = await response.json();
-        const orders = responseJson.map(
-            order => new Order(order.id, 10, order.orderItems.map(
-                orderItem => new OrderItem(orderItem.amount, orderItem.menuItem.name)
-            ), order.status)
-        );
 
-        console.log(responseJson);
 
-        return orders;
+        const orders = await Promise.all(responseJson.map(
+              async order => new Order(order.id, await this.getVisit(order.visitId), order.orderItems.map(
+                 orderItem => new OrderItem(orderItem.amount, orderItem.menuItem.name)
+             ), order.status)
+        ));
+        return await orders;
+    }
+
+    async getVisit(visitId){
+        const response = await fetch("http://localhost:8080/visit/" + visitId);
+        const responseJson = await response.json();
+        console.log(responseJson.tableNumber)
+        return await responseJson.tableNumber;
     }
 
     async setOrderStatus(id, status) {
