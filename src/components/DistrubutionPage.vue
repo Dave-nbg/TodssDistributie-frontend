@@ -20,32 +20,40 @@ const locations = ref([]);
 onMounted(async () => {
     locations.value = await locationService.getLocations();
     orders.value = await orderService.getOrdersForLocation(locations.value[0].id);
+
+    locations.value.forEach(location => loadNewOrders(location.id))
 });
 
 async function loadOrdersForLocation() {
     const locationDropdown = document.querySelector("#location-dropdown");
+
     const locationId = locations.value.filter(location => location.name === locationDropdown.value)[0].id;
 
     orders.value = await orderService.getOrdersForLocation(locationId); 
 }
 
-function loadNewOrders() {
-    fetch("http://localhost:8080/location/realtime?locationId=18")
-    .then(response => response.json())
-    .then(_orders => {
+
+
+async function loadNewOrders(id) {
+
+  fetch("http://localhost:8080/location/realtime?locationId="+id)
+      .then(response => response.json())
+      .then(_orders => {
         _orders.forEach(order => {
-            orders.value.push(new DomainOrder(order.id, 10, order.orderItems.map(
-                orderItem => new DomainOrderItem(orderItem.amount, orderItem.menuItem.name)
-            ), order.status));
+          orders.value.push(new DomainOrder(order.id, 10, order.orderItems.map(
+              orderItem => new DomainOrderItem(orderItem.amount, orderItem.menuItem.name)
+          ), order.status));
         });
         console.log(pendingOrders.value);
 
-        loadNewOrders();
-    })
-    .catch(error => { loadNewOrders() });
+        loadNewOrders(id);
+      })
+      .catch(error => {
+        loadNewOrders(id)
+      });
 }
 
-loadNewOrders();
+
 </script>
 
 <template>
